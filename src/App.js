@@ -15,6 +15,7 @@ import BoardAdmin from "./components/BoardAdmin";
 
 import EventBus from "./common/EventBus";
 
+
 const App = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false);
   const [showAdminBoard, setShowAdminBoard] = useState(false);
@@ -115,14 +116,14 @@ const App = () => {
 
       <div className="container mt-3">
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route path="/home" element={<Home/>} />
-          <Route path="/login" element={<Login/>} />
-          <Route path="/register" element={<Register/>} />
-          <Route path="/profile" element={<Profile/>} />
-          <Route path="/user" element={<BoardUser/>} />
-          <Route path="/mod" element={<BoardModerator/>} />
-          <Route path="/admin" element={<BoardAdmin/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/user" element={<BoardUser />} />
+          <Route path="/mod" element={<BoardModerator />} />
+          <Route path="/admin" element={<BoardAdmin />} />
         </Routes>
       </div>
 
