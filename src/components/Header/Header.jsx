@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import AuthService from '../../services/auth.service'
 import EventBus from '../../common/EventBus'
 import { Link } from 'react-router-dom'
+import jwtDecode from 'jwt-decode'
 
 const Header = () => {
   const [showModeratorBoard, setShowModeratorBoard] = useState(false)
@@ -13,7 +14,8 @@ const Header = () => {
 
     if (user) {
       setCurrentUser(user)
-      console.log(user)
+      const decoded = jwtDecode(user.token)
+      if (decoded.exp * 1000 < Date.now()) AuthService.logout()
       // setShowModeratorBoard(user.roles.includes("ROLE_MODERATOR"));
       setShowAdminBoard(user.user.role.includes('ADMIN_ROLE'))
     }

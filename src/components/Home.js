@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useMQTT } from '../context/mqtt'
 
 const Home = () => {

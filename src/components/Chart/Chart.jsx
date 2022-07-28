@@ -12,12 +12,11 @@ import {
 const Chart = ({ data }) => {
   const dataTrasnformed = data?.map((dt) => {
     return {
-      temperature: dt.temperature,
-      humidity: dt.humidity,
+      temperature: Number(dt.temperature).toFixed(2),
+      humidity: Number(dt.humidity).toFixed(2),
       createat: new Date(dt.createat).toLocaleString()
     }
   })
-
   return (
     <ResponsiveContainer width="100%" height="100%">
       <LineChart data={dataTrasnformed}>

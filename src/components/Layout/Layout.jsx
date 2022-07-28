@@ -16,7 +16,6 @@ const Layout = ({ children }) => {
     }
   }, [message])
 
-  console.log(message)
   return (
     <>
       <Header />
