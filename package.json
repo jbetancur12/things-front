@@ -40,6 +40,10 @@
 		]
 	},
 	"devDependencies": {
+		"@commitlint/cli": "^17.0.3",
+		"@commitlint/config-conventional": "^17.0.3",
+		"commitizen": "^4.2.5",
+		"cz-conventional-changelog": "^3.3.0",
 		"eslint": "^8.20.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-config-standard": "^17.0.0",
@@ -54,5 +58,10 @@
 	"lint-staged": {
 		"*.{js,jsx}": "npm run lint",
 		"*.{js,jsx,css,md,html,json}": "npm run format"
+	},
+	"config": {
+		"commitizen": {
+			"path": "./node_modules/cz-conventional-changelog"
+		}
 	}
 }
