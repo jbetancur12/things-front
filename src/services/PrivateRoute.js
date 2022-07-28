@@ -3,10 +3,9 @@ import { Outlet, Navigate, useLocation } from 'react-router-dom';
 import AuthService from './auth.service';
 
 const PrivateRoute = () => {
-  let location = useLocation();
-  const auth = AuthService.getCurrentUser()
-  return auth ? <Outlet /> : <Navigate to="/login" state={location.pathname} />;
-}
-
+	const location = useLocation();
+	const auth = AuthService.getCurrentUser();
+	return auth ? <Outlet /> : <Navigate to="/login" state={location.pathname} />;
+};
 
 export default PrivateRoute;
