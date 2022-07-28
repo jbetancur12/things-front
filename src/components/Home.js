@@ -1,30 +1,14 @@
-import React, { useState, useEffect } from 'react'
-
-import UserService from '../services/user.service'
+import React, { useState } from 'react'
+import { useMQTT } from '../context/mqtt'
 
 const Home = () => {
-  const [content, setContent] = useState('')
-
-  useEffect(() => {
-    UserService.getPublicContent().then(
-      (response) => {
-        setContent(response.data)
-      },
-      (error) => {
-        const _content =
-          (error.response && error.response.data) ||
-          error.message ||
-          error.toString()
-
-        setContent(_content)
-      }
-    )
-  }, [])
+  const { temperature, humidity } = useMQTT()
 
   return (
     <div className="container">
       <header className="jumbotron">
-        <h3>{content}</h3>
+        <h3>{temperature}</h3>
+        <h3>{humidity}</h3>
       </header>
     </div>
   )
