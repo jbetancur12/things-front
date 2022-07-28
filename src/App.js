@@ -1,6 +1,7 @@
 import './suffix '
 import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-datepicker/dist/react-datepicker.css'
 import './App.css'
 import Layout from './components/Layout/Layout'
 import MainRouter from './MainRouter'
