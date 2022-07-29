@@ -19,19 +19,16 @@ const BoardUser = () => {
     value.value
   }&period=${period}`
 
-  const { data, error } = useSWR(url, fetcher)
+  const { data } = useSWR(url, fetcher)
 
   const getUnitValue = (value) => {
     setValue(value)
     if (value.value === 'minute') {
-      console.log(value)
       setPeriod(15)
     } else {
       setPeriod(1)
     }
   }
-
-  console.log(period)
 
   return (
     <div className="container">
