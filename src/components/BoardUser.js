@@ -12,12 +12,18 @@ dt.setHours(dt.getHours() - 24)
 const BoardUser = () => {
   const [startDate, setStartDate] = useState(dt)
   const [endDate, setEndDate] = useState(new Date())
+  const [value, setValue] = useState({ value: 'minute' })
 
-  const url = `http://192.168.0.6:5000/api/sensor?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
+  const url = `http://192.168.0.6:5000/api/sensor?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&unit=${
+    value.value
+  }&period=15`
 
   const { data, error } = useSWR(url, fetcher)
 
-  console.log(url)
+  const getUnitValue = (value) => {
+    console.log(value)
+    setValue(value)
+  }
 
   return (
     <div className="container">
@@ -35,7 +41,7 @@ const BoardUser = () => {
             />
           </div>
           <div className="card">
-            <Select />
+            <Select getValue={getUnitValue} />
           </div>
         </div>
       </div>
