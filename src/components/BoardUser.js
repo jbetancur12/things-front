@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Select from './Select/Select'
 import useSWR from 'swr'
 import Calendar from './Calendar/Calendar'
 import Chart from './Chart/Chart'
@@ -32,6 +33,9 @@ const BoardUser = () => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
             />
+          </div>
+          <div className="card">
+            <Select />
           </div>
         </div>
       </div>
