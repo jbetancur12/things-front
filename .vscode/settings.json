@@ -1,0 +1,10 @@
+{
+  "vsmqtt.brokerProfiles": [
+    {
+      "name": "Jorge",
+      "host": "192.168.0.6",
+      "port": 5050,
+      "clientId": "vsmqtt_client"
+    }
+  ]
+}

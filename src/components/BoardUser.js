@@ -12,13 +12,7 @@ const BoardUser = () => {
   const [startDate, setStartDate] = useState(dt)
   const [endDate, setEndDate] = useState(new Date())
 
-  const url = `http://192.168.0.6:3000/api/sensors?startDate=${startDate
-    .toISOString()
-    .split('.')[0]
-    .replace('T', ' ')}&endDate=${endDate
-    .toISOString()
-    .split('.')[0]
-    .replace('T', ' ')}`
+  const url = `http://192.168.0.6:5000/api/sensor?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}`
 
   const { data, error } = useSWR(url, fetcher)
 

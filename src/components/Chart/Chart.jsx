@@ -12,9 +12,9 @@ import {
 const Chart = ({ data }) => {
   const dataTrasnformed = data?.map((dt) => {
     return {
-      temperature: Number(dt.temperature).toFixed(2),
-      humidity: Number(dt.humidity).toFixed(2),
-      createat: new Date(dt.createat).toLocaleString()
+      temperature: Number(dt.averageT).toFixed(2),
+      humidity: Number(dt.averageH).toFixed(2),
+      createat: new Date(dt._id).toLocaleString()
     }
   })
   return (
