@@ -5,6 +5,9 @@ import Calendar from './Calendar/Calendar'
 import Chart from './Chart/Chart'
 import AuthService from '../services/auth.service'
 import axios from 'axios'
+import { useMQTT } from '../context/mqtt'
+import { FaTemperatureLow } from 'react-icons/fa'
+import { BsDropletHalf } from 'react-icons/bs'
 
 const fetcher = (url, token) =>
   axios
@@ -16,6 +19,7 @@ dt.setHours(dt.getHours() - 24)
 
 const BoardUser = () => {
   const { token } = AuthService.getCurrentUser()
+  const { temperature, humidity } = useMQTT()
   const [startDate, setStartDate] = useState(dt)
   const [endDate, setEndDate] = useState(new Date())
   const [value, setValue] = useState({ value: 'minute' })
@@ -48,16 +52,24 @@ const BoardUser = () => {
           <Chart data={data} />
         </div>
         <div className="col-12 col-md-3">
+          <div className="card ">
+            <div className="ml-3">
+              <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
+              C°
+            </div>
+            <div className="ml-3">
+              <BsDropletHalf /> <span>{humidity}</span> %
+            </div>
+          </div>
           <div className="card">
+            <Select getValue={getUnitValue} />
+            <p />
             <Calendar
               startDate={startDate}
               endDate={endDate}
               setStartDate={setStartDate}
               setEndDate={setEndDate}
             />
-          </div>
-          <div className="card">
-            <Select getValue={getUnitValue} />
           </div>
           <div className="card">
             <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
