@@ -1,39 +1,38 @@
-import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Button, Container } from 'react-bootstrap'
+import useSWR from 'swr'
+import AuthService from '../services/auth.service'
+import Add from './Admin/Add/Add'
 
-import UserService from '../services/user.service'
-import EventBus from '../common/EventBus'
+const fetcher = (url, token, body) =>
+  axios.post(url, body).then((res) => res.data)
 
 const BoardAdmin = () => {
-  const [content, setContent] = useState('')
+  const { token } = AuthService.getCurrentUser()
+  const [show, setShow] = useState(false)
+  const [values, setValues] = useState(null)
 
-  useEffect(() => {
-    UserService.getAdminBoard().then(
-      (response) => {
-        setContent(response.data)
-      },
-      (error) => {
-        const _content =
-          (error.response &&
-            error.response.data &&
-            error.response.data.message) ||
-          error.message ||
-          error.toString()
+  const url = 'http://192.168.0.6:5000/api/things'
 
-        setContent(_content)
+  const { data, isValidating } = useSWR([url, token, values], fetcher)
 
-        if (error.response && error.response.status === 401) {
-          EventBus.dispatch('logout')
-        }
-      }
-    )
-  }, [])
+  console.log(data)
+
+  const handleClose = () => setShow(false)
+  const handleShow = () => setShow(true)
+
+  const addRow = (values) => {
+    setValues(values)
+  }
 
   return (
-    <div className="container">
-      <header className="jumbotron">
-        <h3>{content}</h3>
-      </header>
-    </div>
+    <Container>
+      <Button variant="primary" onClick={handleShow}>
+        Add New Thing
+      </Button>
+      <Add show={show} handleClose={handleClose} addRow={addRow} />
+    </Container>
   )
 }
 
