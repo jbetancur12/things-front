@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useMQTT } from '../context/mqtt'
 import { FaTemperatureLow } from 'react-icons/fa'
 import { BsDropletHalf } from 'react-icons/bs'
+import { Card, Col, Container, Row } from 'react-bootstrap'
 
 const fetcher = (url, token) =>
   axios
@@ -46,13 +47,13 @@ const BoardUser = () => {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div style={{ height: 600 }} className="col-12 col-md-9">
+    <Container>
+      <Row>
+        <Col style={{ height: 600 }} md={9}>
           <Chart data={data} />
-        </div>
-        <div className="col-12 col-md-3">
-          <div className="card ">
+        </Col>
+        <Col md={3}>
+          <Card>
             <div className="ml-3">
               <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
               C°
@@ -60,8 +61,8 @@ const BoardUser = () => {
             <div className="ml-3">
               <BsDropletHalf /> <span>{humidity}</span> %
             </div>
-          </div>
-          <div className="card">
+          </Card>
+          <Card>
             <Select getValue={getUnitValue} />
             <p />
             <Calendar
@@ -70,16 +71,16 @@ const BoardUser = () => {
               setStartDate={setStartDate}
               setEndDate={setEndDate}
             />
-          </div>
-          <div className="card">
+          </Card>
+          <Card>
             <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
             <p>minT: {minT && minT.toFixed(2)} C°</p>
             <p>maxH: {maxH && maxH.toFixed(2)} %</p>
             <p>minH: {minH && minH.toFixed(2)} %</p>
-          </div>
-        </div>
-      </div>
-    </div>
+          </Card>
+        </Col>
+      </Row>
+    </Container>
   )
 }
 
