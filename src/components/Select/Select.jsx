@@ -12,7 +12,7 @@ const options = [
 ]
 
 const _Select = (props) => {
-  const [value, setValue] = useState('')
+  const [value, setValue] = useState({ value: 'minute', label: 'Minute' })
   const handleChange = (value) => {
     setValue(value)
     props.getValue(value)
@@ -23,7 +23,6 @@ const _Select = (props) => {
       options={options}
       value={value}
       onChange={(value) => handleChange(value)}
-      defaultValue={{ value: 'minute', label: 'Minute' }}
     />
   )
 }

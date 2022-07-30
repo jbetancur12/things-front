@@ -13,7 +13,7 @@ const BoardUser = () => {
   const [startDate, setStartDate] = useState(dt)
   const [endDate, setEndDate] = useState(new Date())
   const [value, setValue] = useState({ value: 'minute' })
-  const [period, setPeriod] = useState(1)
+  const [period, setPeriod] = useState(15)
 
   const url = `http://192.168.0.6:5000/api/sensor?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&unit=${
     value.value
