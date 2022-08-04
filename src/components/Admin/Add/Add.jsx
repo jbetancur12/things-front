@@ -2,6 +2,11 @@ import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Controller, useForm } from 'react-hook-form'
 
+const initialValues = {
+  name: '',
+  mac: ''
+}
+
 const Add = (props) => {
   const {
     setError,
@@ -15,6 +20,7 @@ const Add = (props) => {
   const onHandleSubmit = (event) => {
     // event.preventDefault()
     props.addRow(getValues())
+    reset(initialValues)
     props.handleClose()
   }
 
@@ -53,7 +59,7 @@ const Add = (props) => {
                 pattern: {
                   value:
                     /^[0-9a-f]{1,2}([:])(?:[0-9a-f]{1,2}\1){4}[0-9a-f]{1,2}$/i,
-                  message: 'invalid MAC address'
+                  message: 'Invalid MAC address'
                 }
               }}
               name="mac"
@@ -64,7 +70,7 @@ const Add = (props) => {
                   value={value}
                   ref={ref}
                   isInvalid={errors.mac}
-                  placeholder="Enter the thing MAC"
+                  placeholder="Enter the thing MAC eg. [AA:BB:CC:DD:EE:FF]"
                 />
               )}
             />
