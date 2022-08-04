@@ -1,55 +1,76 @@
 import React, { useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
+import { Controller, useForm } from 'react-hook-form'
 
 const Add = (props) => {
-  const [formData, setFormData] = useState({ name: '', mac: '' })
+  const {
+    setError,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+    getValues
+  } = useForm()
 
-  const handleSubmit = (event) => {
-    event.preventDefault()
-    props.addRow(formData)
-    setFormData({ name: '', mac: '' })
+  const onHandleSubmit = (event) => {
+    // event.preventDefault()
+    props.addRow(getValues())
     props.handleClose()
-  }
-
-  const handleChange = (event) => {
-    event.preventDefault()
-    const data = {
-      ...formData,
-      [event.target.name]: event.target.value
-    }
-    setFormData(data)
   }
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
-      <form onSubmit={handleSubmit}>
+      <Form onSubmit={handleSubmit(onHandleSubmit)} onReset={reset}>
         <Modal.Header closeButton>Add New Thing</Modal.Header>
         <Modal.Body>
-          <Form.Group
-            className="mb-3"
-            controlId="exampleForm.ControlInput1"
-            role="form">
+          <Form.Group className="mb-3" controlId="name" role="form">
             <Form.Label>Name</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Humidity"
+            <Controller
+              control={control}
+              rules={{ required: 'The thing name is required' }}
               name="name"
-              onChange={handleChange}
-              value={formData.name}
+              defaultValue=""
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Form.Control
+                  onChange={onChange}
+                  value={value}
+                  ref={ref}
+                  isInvalid={errors.name}
+                  placeholder="Enter thing name"
+                />
+              )}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.name?.message}
+            </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group
-            className="mb-3"
-            controlId="exampleForm.ControlInput1"
-            role="form">
+          <Form.Group className="mb-3" controlId="mac" role="form">
             <Form.Label>Mac</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="34:C4..."
+            <Controller
+              control={control}
+              rules={{
+                required: 'MAC Address is required',
+                pattern: {
+                  value:
+                    /^[0-9a-f]{1,2}([:])(?:[0-9a-f]{1,2}\1){4}[0-9a-f]{1,2}$/i,
+                  message: 'invalid MAC address'
+                }
+              }}
               name="mac"
-              onChange={handleChange}
-              value={formData.mac}
+              defaultValue=""
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <Form.Control
+                  onChange={onChange}
+                  value={value}
+                  ref={ref}
+                  isInvalid={errors.mac}
+                  placeholder="Enter the thing MAC"
+                />
+              )}
             />
+            <Form.Control.Feedback type="invalid">
+              {errors.mac?.message}
+            </Form.Control.Feedback>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
@@ -60,7 +81,7 @@ const Add = (props) => {
             Save Changes
           </Button>
         </Modal.Footer>
-      </form>
+      </Form>
     </Modal>
   )
 }

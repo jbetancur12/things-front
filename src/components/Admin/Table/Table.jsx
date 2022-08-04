@@ -6,16 +6,16 @@ const TableThings = (props) => {
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
-          <th>First Name</th>
-          <th>Last Name</th>
+          <th>Id</th>
+          <th>Thing</th>
+          <th>MAC</th>
         </tr>
       </thead>
       <tbody>
         {props.data &&
           props.data.map((dt) => (
             <tr key={dt._id}>
-              <td>{dt._id}</td>
+              <td>{`${dt._id.slice(0, 4)}...${dt._id.slice(-4)}`}</td>
               <td>{dt.name}</td>
               <td>{dt.mac}</td>
               <td>{dt.createdAt}</td>
