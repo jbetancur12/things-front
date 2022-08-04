@@ -1,14 +1,15 @@
 const eventBus = {
-  on(event, callback) {
+  on (event, callback) {
     document.addEventListener(event, (e) => {
       window.location.replace('/login')
-      localStorage.removeItem('user')
+
+      localStorage.removeItem('user') // eslint-disable-line
     })
   },
-  dispatch(event, data) {
-    document.dispatchEvent(new CustomEvent(event, { detail: data }))
+  dispatch (event, data) {
+    document.dispatchEvent(new CustomEvent(event, { detail: data })) // eslint-disable-line
   },
-  remove(event, callback) {
+  remove (event, callback) {
     document.removeEventListener(event, callback)
   }
 }

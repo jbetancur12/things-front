@@ -2,7 +2,6 @@ import './suffix '
 import React from 'react'
 import 'react-datepicker/dist/react-datepicker.css'
 import './App.css'
-import Layout from './components/Layout/Layout'
 import MainRouter from './MainRouter'
 import { Connector } from 'mqtt-react-hooks'
 import { MQTTProvider } from './context/mqtt'
@@ -28,11 +27,9 @@ const App = () => {
   }
 
   return (
-    <Connector brokerUrl="ws://192.168.0.6:8080" options={options}>
+    <Connector brokerUrl='ws://192.168.0.6:8080' options={options}>
       <MQTTProvider>
-        <Layout>
-          <MainRouter />
-        </Layout>
+        <MainRouter />
       </MQTTProvider>
     </Connector>
   )

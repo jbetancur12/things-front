@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -9,7 +9,7 @@ const initialValues = {
 
 const Add = (props) => {
   const {
-    setError,
+    setError, // eslint-disable-line
     handleSubmit,
     control,
     reset,
@@ -29,28 +29,28 @@ const Add = (props) => {
       <Form onSubmit={handleSubmit(onHandleSubmit)} onReset={reset}>
         <Modal.Header closeButton>Add New Thing</Modal.Header>
         <Modal.Body>
-          <Form.Group className="mb-3" controlId="name" role="form">
+          <Form.Group className='mb-3' controlId='name' role='form'>
             <Form.Label>Name</Form.Label>
             <Controller
               control={control}
               rules={{ required: 'The thing name is required' }}
-              name="name"
-              defaultValue=""
+              name='name'
+              defaultValue=''
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Form.Control
                   onChange={onChange}
                   value={value}
                   ref={ref}
                   isInvalid={errors.name}
-                  placeholder="Enter thing name"
+                  placeholder='Enter thing name'
                 />
               )}
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type='invalid'>
               {errors.name?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="mac" role="form">
+          <Form.Group className='mb-3' controlId='mac' role='form'>
             <Form.Label>Mac</Form.Label>
             <Controller
               control={control}
@@ -62,28 +62,28 @@ const Add = (props) => {
                   message: 'Invalid MAC address'
                 }
               }}
-              name="mac"
-              defaultValue=""
+              name='mac'
+              defaultValue=''
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Form.Control
                   onChange={onChange}
                   value={value}
                   ref={ref}
                   isInvalid={errors.mac}
-                  placeholder="Enter the thing MAC eg. [AA:BB:CC:DD:EE:FF]"
+                  placeholder='Enter the thing MAC eg. [AA:BB:CC:DD:EE:FF]'
                 />
               )}
             />
-            <Form.Control.Feedback type="invalid">
+            <Form.Control.Feedback type='invalid'>
               {errors.mac?.message}
             </Form.Control.Feedback>
           </Form.Group>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
+          <Button variant='secondary' onClick={props.handleClose}>
             Close
           </Button>
-          <Button type="submit" variant="primary">
+          <Button type='submit' variant='primary'>
             Save Changes
           </Button>
         </Modal.Footer>

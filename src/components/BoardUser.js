@@ -46,37 +46,35 @@ const BoardUser = () => {
   }
 
   return (
-    <div className="container">
-      <div className="row">
-        <div style={{ height: 600 }} className="col-12 col-md-9">
-          <Chart data={data} />
+    <div className='row'>
+      <div style={{ height: 600 }} className='col-12 col-md-9'>
+        <Chart data={data} />
+      </div>
+      <div className='col-12 col-md-3'>
+        <div className='card'>
+          <div className='ml-3'>
+            <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
+            C°
+          </div>
+          <div className='ml-3'>
+            <BsDropletHalf /> <span>{humidity}</span> %
+          </div>
         </div>
-        <div className="col-12 col-md-3">
-          <div className="card">
-            <div className="ml-3">
-              <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
-              C°
-            </div>
-            <div className="ml-3">
-              <BsDropletHalf /> <span>{humidity}</span> %
-            </div>
-          </div>
-          <div className="card">
-            <Select getValue={getUnitValue} />
-            <p />
-            <Calendar
-              startDate={startDate}
-              endDate={endDate}
-              setStartDate={setStartDate}
-              setEndDate={setEndDate}
-            />
-          </div>
-          <div className="card">
-            <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
-            <p>minT: {minT && minT.toFixed(2)} C°</p>
-            <p>maxH: {maxH && maxH.toFixed(2)} %</p>
-            <p>minH: {minH && minH.toFixed(2)} %</p>
-          </div>
+        <div className='card'>
+          <Select getValue={getUnitValue} />
+          <p />
+          <Calendar
+            startDate={startDate}
+            endDate={endDate}
+            setStartDate={setStartDate}
+            setEndDate={setEndDate}
+          />
+        </div>
+        <div className='card'>
+          <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
+          <p>minT: {minT && minT.toFixed(2)} C°</p>
+          <p>maxH: {maxH && maxH.toFixed(2)} %</p>
+          <p>minH: {minH && minH.toFixed(2)} %</p>
         </div>
       </div>
     </div>

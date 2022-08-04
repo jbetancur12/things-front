@@ -18,7 +18,7 @@ const login = (email, password) => {
     })
     .then((response) => {
       if (response.data.token) {
-        localStorage.setItem('user', JSON.stringify(response.data))
+        localStorage.setItem('user', JSON.stringify(response.data)) // eslint-disable-line
       }
 
       return response.data
@@ -26,11 +26,11 @@ const login = (email, password) => {
 }
 
 const logout = () => {
-  localStorage.removeItem('user')
+  localStorage.removeItem('user') // eslint-disable-line
 }
 
 const getCurrentUser = () => {
-  return JSON.parse(localStorage.getItem('user'))
+  return JSON.parse(localStorage.getItem('user')) // eslint-disable-line
 }
 
 const AuthService = {

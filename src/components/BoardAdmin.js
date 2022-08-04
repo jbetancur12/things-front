@@ -1,17 +1,11 @@
-import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { Button, Container } from 'react-bootstrap'
-import useSWR from 'swr'
-import AuthService from '../services/auth.service'
+
 import ThingService from '../services/things.service'
 import Add from './Admin/Add/Add'
 import Table from './Admin/Table/Table'
 
-const fetcher = (url, token, body) =>
-  axios.post(url, body).then((res) => res.data)
-
 const BoardAdmin = () => {
-  const { token } = AuthService.getCurrentUser()
   const [show, setShow] = useState(false)
   const [values, setValues] = useState(null)
   const [things, setThings] = useState(null)
@@ -35,7 +29,7 @@ const BoardAdmin = () => {
 
   return (
     <Container>
-      <Button variant="primary" onClick={handleShow} className="mb-3">
+      <Button variant='primary' onClick={handleShow} className='mb-3'>
         Add New Thing
       </Button>
       <Add show={show} handleClose={handleClose} addRow={addRow} />
