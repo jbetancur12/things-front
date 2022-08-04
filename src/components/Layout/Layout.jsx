@@ -17,10 +17,10 @@ const Layout = ({ children }) => {
   }, [message])
 
   return (
-    <>
+    <div>
       <Header />
       <main>{children}</main>
-    </>
+    </div>
   )
 }
 
