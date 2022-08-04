@@ -1,6 +1,5 @@
 import axios from 'axios'
 import React, { useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
 import useSWR from 'swr'
 import AuthService from '../services/auth.service'
 import Add from './Admin/Add/Add'
@@ -27,12 +26,12 @@ const BoardAdmin = () => {
   }
 
   return (
-    <Container>
-      <Button variant="primary" onClick={handleShow}>
+    <div>
+      <button type="button" variant="primary" onClick={handleShow}>
         Add New Thing
-      </Button>
+      </button>
       <Add show={show} handleClose={handleClose} addRow={addRow} />
-    </Container>
+    </div>
   )
 }
 

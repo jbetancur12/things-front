@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { Button, Form, Modal } from 'react-bootstrap'
 
 const Add = (props) => {
   const [formData, setFormData] = useState({ name: '', mac: '' })
@@ -21,47 +20,51 @@ const Add = (props) => {
   }
 
   return (
-    <Modal show={props.show} onHide={props.handleClose}>
+    <div className="modal" show={props.show} onHide={props.handleClose}>
       <form onSubmit={handleSubmit}>
-        <Modal.Header closeButton>Add New Thing</Modal.Header>
-        <Modal.Body>
-          <Form.Group
-            className="mb-3"
+        <div className="modal-header" closeButton>
+          Add New Thing
+        </div>
+        <div className="modal-body">
+          <div
+            className="form-group mb-3"
             controlId="exampleForm.ControlInput1"
             role="form">
-            <Form.Label>Name</Form.Label>
-            <Form.Control
+            <label>Name</label>
+            <div
+              className="form-control"
               type="text"
               placeholder="Humidity"
               name="name"
               onChange={handleChange}
               value={formData.name}
             />
-          </Form.Group>
-          <Form.Group
-            className="mb-3"
+          </div>
+          <div
+            className="form-group mb-3"
             controlId="exampleForm.ControlInput1"
             role="form">
-            <Form.Label>Mac</Form.Label>
-            <Form.Control
+            <label>Mac</label>
+            <div
+              className="form-control"
               type="text"
               placeholder="34:C4..."
               name="mac"
               onChange={handleChange}
               value={formData.mac}
             />
-          </Form.Group>
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={props.handleClose}>
+          </div>
+        </div>
+        <div className="modal-footer">
+          <button type="button" variant="secondary" onClick={props.handleClose}>
             Close
-          </Button>
-          <Button type="submit" variant="primary">
+          </button>
+          <button type="submit" variant="primary">
             Save Changes
-          </Button>
-        </Modal.Footer>
+          </button>
+        </div>
       </form>
-    </Modal>
+    </div>
   )
 }
 
