@@ -18,7 +18,11 @@ const TableThings = (props) => {
               <td>{dt.name}</td>
               <td>{dt.mac}</td>
               <td>
-                <Button type='button' className='btn mr-3'>
+                <Button
+                  type='button'
+                  className='btn mr-3'
+                  onClick={() => props.updateRow(dt)}
+                >
                   Edit
                 </Button>
                 <Button

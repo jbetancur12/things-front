@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Controller, useForm } from 'react-hook-form'
 
@@ -8,6 +8,8 @@ const initialValues = {
 }
 
 const Add = (props) => {
+  const isAddMode = !props.edit
+  const [, setThing] = useState(null)
   const {
     setError, // eslint-disable-line
     handleSubmit,
@@ -23,6 +25,13 @@ const Add = (props) => {
     reset(initialValues)
     props.handleClose()
   }
+
+  useEffect(() => {
+    if (!isAddMode) {
+      console.log('Entro')
+      setThing(props.data)
+    }
+  }, [])
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
