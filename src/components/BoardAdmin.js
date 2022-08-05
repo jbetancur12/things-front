@@ -22,6 +22,14 @@ const BoardAdmin = () => {
       if (data.status === 200) setValues(values)
     })
   }
+  const deleteRow = (id) => {
+    ThingService.deleteThing(id).then((data) => {
+      if (data.status === 200) {
+        const _things = things && things.filter((thing) => thing._id !== id)
+        setValues(_things)
+      }
+    })
+  }
 
   useEffect(() => {
     ThingService.getThings().then((data) => setThings(data.data))
@@ -33,7 +41,7 @@ const BoardAdmin = () => {
         Add New Thing
       </Button>
       <Add show={show} handleClose={handleClose} addRow={addRow} />
-      <Table data={things} />
+      <Table data={things} deleteRow={deleteRow} />
     </Container>
   )
 }

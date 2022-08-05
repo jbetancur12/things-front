@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import AuthService from '../../../services/auth.service'
 import jwtDecode from 'jwt-decode'
+import ClassNames from 'classnames'
 
 function SideBar () {
   const user = AuthService.getCurrentUser()
@@ -57,8 +58,8 @@ function SideBar () {
             <li className='nav-item '>
               <NavLink
                 to='/profile'
-                className='nav-link'
-                activeClassName='active'
+                className={({ isActive }) =>
+                  ClassNames('nav-link', { active: isActive })}
               >
                 <i className='nav-icon fas fa-tachometer-alt' />
                 <p>Dashboard</p>
@@ -68,8 +69,8 @@ function SideBar () {
               <li className='nav-item'>
                 <NavLink
                   to='/user'
-                  className='nav-link'
-                  activeClassName='active'
+                  className={({ isActive }) =>
+                    ClassNames('nav-link', { active: isActive })}
                 >
                   <i className='nav-icon fas fa-th' />
                   <p>
@@ -83,8 +84,8 @@ function SideBar () {
               <li className='nav-item'>
                 <NavLink
                   to='/admin'
-                  className='nav-link'
-                  activeClassName='active'
+                  className={({ isActive }) =>
+                    ClassNames('nav-link', { active: isActive })}
                 >
                   <i className='nav-icon fas fa-th' />
                   <p>
