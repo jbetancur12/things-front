@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Controller, useForm } from 'react-hook-form'
+import { useDispatch } from 'react-redux'
+import { createThing, updateThing } from '../../../slices/things'
 
 const initialValues = {
   name: '',
@@ -8,35 +10,54 @@ const initialValues = {
 }
 
 const Add = (props) => {
-  const isAddMode = !props.edit
-  const [, setThing] = useState(null)
+  const dispatch = useDispatch()
+
+  const isAddMode = !props.id
+
   const {
     setError, // eslint-disable-line
     handleSubmit,
     control,
     reset,
     formState: { errors },
-    getValues
-  } = useForm()
+    getValues,
+    setValue
+  } = useForm({ defaultValues: initialValues })
 
-  const onHandleSubmit = (event) => {
+  const onHandleSubmit = () => {
     // event.preventDefault()
-    props.addRow(getValues())
+    if (isAddMode) {
+      dispatch(createThing(getValues()))
+        .unwrap()
+        .then((data) => console.log(data))
+    } else {
+      dispatch(updateThing({ id: props.id._id, body: getValues() }))
+        .unwrap()
+        .then((data) => console.log(data))
+    }
+
+    // props.addRow(getValues())
     reset(initialValues)
     props.handleClose()
   }
 
   useEffect(() => {
     if (!isAddMode) {
-      console.log('Entro')
-      setThing(props.data)
+      setValue('name', props.id.name, {
+        shouldValidate: true
+      })
+      setValue('mac', props.id.mac, {
+        shouldValidate: true
+      })
     }
-  }, [])
+  }, [props.id])
 
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Form onSubmit={handleSubmit(onHandleSubmit)} onReset={reset}>
-        <Modal.Header closeButton>Add New Thing</Modal.Header>
+        <Modal.Header closeButton>
+          {isAddMode ? 'Add New Thing' : 'Edit Thing'}
+        </Modal.Header>
         <Modal.Body>
           <Form.Group className='mb-3' controlId='name' role='form'>
             <Form.Label>Name</Form.Label>
@@ -44,7 +65,6 @@ const Add = (props) => {
               control={control}
               rules={{ required: 'The thing name is required' }}
               name='name'
-              defaultValue=''
               render={({ field: { onChange, onBlur, value, ref } }) => (
                 <Form.Control
                   onChange={onChange}

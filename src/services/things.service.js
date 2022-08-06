@@ -10,6 +10,10 @@ const createThing = (data) => {
   return axios.post(API_URL, data).then((data) => data)
 }
 
+const updateThing = (id, body) => {
+  return axios.put(API_URL + id, body).then((data) => data)
+}
+
 const deleteThing = (id) => {
   return axios.delete(API_URL + id).then((data) => data)
 }
@@ -17,6 +21,7 @@ const deleteThing = (id) => {
 const ThingService = {
   getThings,
   createThing,
+  updateThing,
   deleteThing
 }
 
