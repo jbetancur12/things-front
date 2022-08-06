@@ -14,7 +14,6 @@ export const updateThing = createAsyncThunk(
   'things/update',
   async ({ id, body }) => {
     const res = await ThingService.updateThing(id, body)
-    console.log(res.data)
     return res.data
   }
 )
@@ -40,14 +39,14 @@ const thingSlice = createSlice({
       return [...action.payload]
     },
     [updateThing.fulfilled]: (state, action) => {
-      const index = state.findIndex((thing) => thing.id === action.payload.id)
+      const index = state.findIndex((thing) => thing._id === action.payload._id)
       state[index] = {
         ...state[index],
         ...action.payload
       }
     },
     [deleteThing.fulfilled]: (state, action) => {
-      const index = state.findIndex(({ id }) => id === action.payload.id)
+      const index = state.findIndex(({ id }) => id === action.payload._id)
       state.splice(index, 1)
     }
   }

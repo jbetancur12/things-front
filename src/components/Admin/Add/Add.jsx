@@ -31,6 +31,7 @@ const Add = (props) => {
         .unwrap()
         .then((data) => console.log(data))
     } else {
+      console.log(getValues())
       dispatch(updateThing({ id: props.id._id, body: getValues() }))
         .unwrap()
         .then((data) => console.log(data))
