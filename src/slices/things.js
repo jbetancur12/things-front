@@ -35,8 +35,12 @@ const thingSlice = createSlice({
     [createThing.fulfilled]: (state, action) => {
       state.push(action.payload)
     },
+
     [retrieveThings.fulfilled]: (state, action) => {
       return [...action.payload]
+    },
+    [retrieveThings.rejected]: (state, action) => {
+      console.log(action)
     },
     [updateThing.fulfilled]: (state, action) => {
       const index = state.findIndex((thing) => thing._id === action.payload._id)
