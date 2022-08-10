@@ -18,12 +18,12 @@ const f = (data) =>
   }))
 
 const _loadSuggestions = (i, cb) => {
-  fetch('http://192.168.0.6:5000/api/users/' + i)
+  fetch('http://192.168.0.6:5000/api/users/?email=' + i)
     .then((resp) => resp.json())
     .then((json) => cb(f(json)))
 }
 
-const loadSuggestions = debounce(_loadSuggestions, 3000)
+const loadSuggestions = debounce(_loadSuggestions, 1000)
 
 const Add = (props) => {
   const dispatch = useDispatch()
@@ -48,7 +48,12 @@ const Add = (props) => {
         .unwrap()
         .then((data) => console.log(data))
     } else {
-      dispatch(updateThing({ id: props.id._id, body: getValues() }))
+      dispatch(
+        updateThing({
+          id: props.id._id,
+          body: { ...getValues(), user: getValues().user.value }
+        })
+      )
         .unwrap()
         .then((data) => console.log(data))
     }
@@ -56,6 +61,18 @@ const Add = (props) => {
     // props.addRow(getValues())
     reset(initialValues)
     props.handleClose()
+  }
+
+  const getUser = async (id) => {
+    const res = await fetch('http://192.168.0.6:5000/api/users/?_id=' + id)
+    const user = await res.json()
+    setValue(
+      'user',
+      { label: user[0].email, value: user[0]._id },
+      {
+        shouldValidate: true
+      }
+    )
   }
 
   useEffect(() => {
@@ -66,6 +83,7 @@ const Add = (props) => {
       setValue('mac', props.id.mac, {
         shouldValidate: true
       })
+      getUser(props.id.user)
     }
   }, [props.id])
 
