@@ -1,13 +1,29 @@
+import debounce from 'lodash.debounce'
 import React, { useEffect } from 'react'
 import { Button, Form, Modal } from 'react-bootstrap'
 import { Controller, useForm } from 'react-hook-form'
 import { useDispatch } from 'react-redux'
 import { createThing, updateThing } from '../../../slices/things'
+import AsyncSelect from 'react-select/async'
 
 const initialValues = {
   name: '',
   mac: ''
 }
+
+const f = (data) =>
+  data.map((option) => ({
+    value: option._id,
+    label: option.email
+  }))
+
+const _loadSuggestions = (i, cb) => {
+  fetch('http://192.168.0.6:5000/api/users/' + i)
+    .then((resp) => resp.json())
+    .then((json) => cb(f(json)))
+}
+
+const loadSuggestions = debounce(_loadSuggestions, 3000)
 
 const Add = (props) => {
   const dispatch = useDispatch()
@@ -27,7 +43,7 @@ const Add = (props) => {
   const onHandleSubmit = () => {
     // event.preventDefault()
     if (isAddMode) {
-      const newObject = { ...getValues(), user: '62e40fe3f61128754f6c2217' }
+      const newObject = { ...getValues(), user: getValues().user.value }
       dispatch(createThing(newObject))
         .unwrap()
         .then((data) => console.log(data))
@@ -53,6 +69,8 @@ const Add = (props) => {
     }
   }, [props.id])
 
+  console.log(errors)
+
   return (
     <Modal show={props.show} onHide={props.handleClose}>
       <Form onSubmit={handleSubmit(onHandleSubmit)} onReset={reset}>
@@ -60,6 +78,28 @@ const Add = (props) => {
           {isAddMode ? 'Add New Thing' : 'Edit Thing'}
         </Modal.Header>
         <Modal.Body>
+          <Form.Group className='mb-3' controlId='user' role='form'>
+            <Form.Label>User</Form.Label>
+            <Controller
+              control={control}
+              rules={{ required: 'The user is required' }}
+              name='user'
+              render={({ field: { onChange, onBlur, value, ref } }) => (
+                <AsyncSelect
+                  cacheOptions
+                  isClearable
+                  value={value}
+                  loadOptions={loadSuggestions}
+                  placeholder='User'
+                  onChange={onChange}
+                />
+              )}
+            />
+            <div className='invalid-feedback' style={{ display: 'block' }}>
+              {errors.user?.message}
+            </div>
+          </Form.Group>
+
           <Form.Group className='mb-3' controlId='name' role='form'>
             <Form.Label>Name</Form.Label>
             <Controller
