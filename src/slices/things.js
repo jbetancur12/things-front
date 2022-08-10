@@ -4,8 +4,8 @@ const initialState = []
 
 export const createThing = createAsyncThunk(
   'things/create',
-  async ({ name, mac }) => {
-    const res = await ThingService.createThing({ name, mac })
+  async ({ name, mac, user }) => {
+    const res = await ThingService.createThing({ name, mac, user })
     return res.data.data
   }
 )

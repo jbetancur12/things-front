@@ -27,11 +27,11 @@ const Add = (props) => {
   const onHandleSubmit = () => {
     // event.preventDefault()
     if (isAddMode) {
-      dispatch(createThing(getValues()))
+      const newObject = { ...getValues(), user: '62e40fe3f61128754f6c2217' }
+      dispatch(createThing(newObject))
         .unwrap()
         .then((data) => console.log(data))
     } else {
-      console.log(getValues())
       dispatch(updateThing({ id: props.id._id, body: getValues() }))
         .unwrap()
         .then((data) => console.log(data))
