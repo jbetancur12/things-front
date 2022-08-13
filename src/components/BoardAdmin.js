@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { deleteThing, retrieveThings } from '../slices/things'
 import Add from './Admin/Add/Add'
+import ReactTable from './Admin/ReactTable/ReactTable'
 import Table from './Admin/Table/Table'
 
 const BoardAdmin = () => {
@@ -45,6 +46,7 @@ const BoardAdmin = () => {
       </Button>
       <Add show={show} handleClose={handleClose} />
       <Table data={things} deleteRow={deleteRow} />
+      <ReactTable data={things} />
     </Container>
   )
 }

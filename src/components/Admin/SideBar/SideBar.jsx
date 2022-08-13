@@ -95,6 +95,18 @@ function SideBar () {
                 </NavLink>
               </li>
             )}
+            {true && (
+              <li className='nav-item'>
+                <NavLink
+                  to='/devices'
+                  className={({ isActive }) =>
+                    ClassNames('nav-link', { active: isActive })}
+                >
+                  <i className='nav-icon fas fa-sim-card' />
+                  <p>Devices</p>
+                </NavLink>
+              </li>
+            )}
 
             <li className='nav-header'>EXAMPLES</li>
             <li className='nav-item'>

@@ -18,11 +18,16 @@ const deleteThing = (id) => {
   return axios.delete(API_URL + id).then((data) => data)
 }
 
+const getUserThings = (userId) => {
+  return axios.get(API_URL + '?user=' + userId)
+}
+
 const ThingService = {
   getThings,
   createThing,
   updateThing,
-  deleteThing
+  deleteThing,
+  getUserThings
 }
 
 export default ThingService

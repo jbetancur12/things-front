@@ -7,6 +7,7 @@ import Layout from './components/Layout/Layout'
 import Login from './components/Login'
 import Profile from './components/Profile'
 import Register from './components/Register'
+import Devices from './components/User/Devices/Devices'
 // import PrivateRoute from './services/PrivateRoute'
 
 const MainRouter = () => {
@@ -22,6 +23,7 @@ const MainRouter = () => {
           <Route exact path='profile' element={<Profile />} />
           <Route path='user' element={<BoardUser />} />
           <Route path='admin' element={<BoardAdmin />} />
+          <Route path='devices' element={<Devices />} />
           <Route path='mod' element={<BoardModerator />} />
           {/* </Route> */}
         </Route>
