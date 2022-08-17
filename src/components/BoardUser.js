@@ -8,6 +8,7 @@ import axios from 'axios'
 import { useMQTT } from '../context/mqtt'
 import { FaTemperatureLow } from 'react-icons/fa'
 import { BsDropletHalf } from 'react-icons/bs'
+import { useSearchParams } from 'react-router-dom'
 
 const fetcher = (url, token) =>
   axios
@@ -19,6 +20,7 @@ dt.setHours(dt.getHours() - 24)
 
 const BoardUser = () => {
   const { token } = AuthService.getCurrentUser()
+  const [searchParams] = useSearchParams()
   const { temperature, humidity } = useMQTT()
   const [startDate, setStartDate] = useState(dt)
   const [endDate, setEndDate] = useState(new Date())
@@ -27,7 +29,7 @@ const BoardUser = () => {
 
   const url = `http://192.168.0.6:5000/api/sensor/data?startDate=${startDate.toISOString()}&endDate=${endDate.toISOString()}&unit=${
     value.value
-  }&period=${period}`
+  }&period=${period}&mac=${searchParams.get('mac')}`
 
   const { data } = useSWR([url, token], fetcher)
 
@@ -43,6 +45,14 @@ const BoardUser = () => {
     } else {
       setPeriod(1)
     }
+  }
+
+  if (!searchParams.get('mac')) {
+    return <div>No hay MAC</div>
+  }
+
+  if (data && !data.length > 0) {
+    return <div>No hay data</div>
   }
 
   return (

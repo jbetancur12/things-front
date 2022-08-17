@@ -1,4 +1,7 @@
 import React from 'react'
+import clx from 'classnames'
+import styles from './Devices.module.scss'
+import { Link } from 'react-router-dom'
 
 const Card = ({ devices }) => {
   console.log(devices)
@@ -7,12 +10,17 @@ const Card = ({ devices }) => {
       <div className='row'>
         {devices.map((device) => (
           <div className='col-4' key={device._id}>
-            <div className='card'>
-              <div className='card-body text-center'>
-                <h4>{device.name}</h4>
-                <p>{device.mac}</p>
+            <Link
+              to={'/user?mac=' + device.mac}
+              style={{ textDecoration: 'none' }}
+            >
+              <div className={clx('card', styles.devicesCard)}>
+                <div className='card-body text-center'>
+                  <h4>{device.name}</h4>
+                  <p>{device.mac}</p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         ))}
       </div>
