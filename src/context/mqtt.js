@@ -15,7 +15,8 @@ export const MQTTProvider = ({ children }) => {
 
   return (
     <MQTTContext.Provider
-      value={{ temperature, setTemp, humidity, setHumidity }}>
+      value={{ temperature, setTemp, humidity, setHumidity }}
+    >
       {children}
     </MQTTContext.Provider>
   )

@@ -76,7 +76,9 @@
     "husky": ">=6",
     "lint-staged": ">=10",
     "prettier": "2.7.1",
-    "prettier-config-standard": "^5.0.0"
+    "prettier-config-standard": "^5.0.0",
+    "snazzy": "^9.0.0",
+    "standard-summary": "^1.0.0"
   },
   "lint-staged": {
     "*.{js,jsx}": [

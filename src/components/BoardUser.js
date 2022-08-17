@@ -55,6 +55,8 @@ const BoardUser = () => {
     return <div>No hay data</div>
   }
 
+  // Comment
+
   return (
     <div className='row'>
       <div style={{ height: 600 }} className='col-12 col-md-9'>

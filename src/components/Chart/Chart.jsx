@@ -18,30 +18,30 @@ const Chart = ({ data }) => {
     }
   })
   return (
-    <ResponsiveContainer width="100%" height="100%">
+    <ResponsiveContainer width='100%' height='100%'>
       <LineChart data={dataTrasnformed}>
         <Line
-          yAxisId="left"
-          type="monotone"
-          dataKey="temperature"
-          stroke="#8884d8"
+          yAxisId='left'
+          type='monotone'
+          dataKey='temperature'
+          stroke='#8884d8'
           dot={false}
         />
         <Line
-          yAxisId="right"
-          type="monotone"
-          dataKey="humidity"
-          stroke="#82ca9d"
+          yAxisId='right'
+          type='monotone'
+          dataKey='humidity'
+          stroke='#82ca9d'
           dot={false}
         />
-        <CartesianGrid stroke="#ccc" />
+        <CartesianGrid stroke='#ccc' />
         <Legend />
-        <XAxis dataKey="createat" hide />
-        <YAxis yAxisId="left" unit="C°" domain={['auto', 'auto']} />
+        <XAxis dataKey='createat' hide />
+        <YAxis yAxisId='left' unit='C°' domain={['auto', 'auto']} />
         <YAxis
-          yAxisId="right"
-          orientation="right"
-          unit="%"
+          yAxisId='right'
+          orientation='right'
+          unit='%'
           domain={['auto', 'auto']}
         />
         <Tooltip />

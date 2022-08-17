@@ -4,8 +4,8 @@ import AuthService from '../services/auth.service'
 const Profile = () => {
   const currentUser = AuthService.getCurrentUser()
   return (
-    <div className="container">
-      <header className="jumbotron">
+    <div className='container'>
+      <header className='jumbotron'>
         <h3>
           <strong>{currentUser.user.name}</strong> Profile
         </h3>
