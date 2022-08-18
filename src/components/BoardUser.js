@@ -58,38 +58,54 @@ const BoardUser = () => {
   // Comment
 
   return (
-    <div className='row'>
-      <div style={{ height: 600 }} className='col-12 col-md-9'>
-        <Chart data={data} />
-      </div>
-      <div className='col-12 col-md-3'>
-        <div className='card'>
-          <div className='ml-3'>
-            <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
-            C°
+    <>
+      <div className='row'>
+        <div style={{ height: 600 }} className='col-12 col-md-9'>
+          <Chart data={data} />
+        </div>
+        <div className='col-12 col-md-3'>
+          <div className='card'>
+            <div className='ml-3'>
+              <FaTemperatureLow /> <span>{Number(temperature).toFixed(2)}</span>{' '}
+              C°
+            </div>
+            <div className='ml-3'>
+              <BsDropletHalf /> <span>{humidity}</span> %
+            </div>
           </div>
-          <div className='ml-3'>
-            <BsDropletHalf /> <span>{humidity}</span> %
+          <div className='card'>
+            <Select getValue={getUnitValue} />
+            <p />
+            <Calendar
+              startDate={startDate}
+              endDate={endDate}
+              setStartDate={setStartDate}
+              setEndDate={setEndDate}
+            />
+          </div>
+          <div className='card'>
+            <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
+            <p>minT: {minT && minT.toFixed(2)} C°</p>
+            <p>maxH: {maxH && maxH.toFixed(2)} %</p>
+            <p>minH: {minH && minH.toFixed(2)} %</p>
           </div>
         </div>
-        <div className='card'>
-          <Select getValue={getUnitValue} />
-          <p />
-          <Calendar
-            startDate={startDate}
-            endDate={endDate}
-            setStartDate={setStartDate}
-            setEndDate={setEndDate}
-          />
-        </div>
-        <div className='card'>
-          <p>maxT: {maxT && maxT.toFixed(2)} C°</p>
-          <p>minT: {minT && minT.toFixed(2)} C°</p>
-          <p>maxH: {maxH && maxH.toFixed(2)} %</p>
-          <p>minH: {minH && minH.toFixed(2)} %</p>
-        </div>
       </div>
-    </div>
+      <div className='row'>
+        <iframe
+          width='450'
+          height='260'
+          style={{ border: '1px solid #cccccc' }}
+          src='https://thingspeak.com/channels/1835529/charts/1?bgcolor=%23ffffff&color=%23d62020&dynamic=true&results=60&title=Temperature+Milan&type=line&xaxis=TimeStamp&yaxis=%C2%BAC'
+        />
+        <iframe
+          width='450'
+          height='260'
+          style={{ border: '1px solid #cccccc' }}
+          src='https://thingspeak.com/channels/1835529/widgets/508209'
+        />
+      </div>
+    </>
   )
 }
 

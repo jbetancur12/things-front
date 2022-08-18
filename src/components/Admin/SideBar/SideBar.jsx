@@ -65,7 +65,7 @@ function SideBar () {
                 <p>Dashboard</p>
               </NavLink>
             </li>
-            {!showAdminBoard && (
+            {/* {!showAdminBoard && (
               <li className='nav-item'>
                 <NavLink
                   to='/user'
@@ -79,7 +79,7 @@ function SideBar () {
                   </p>
                 </NavLink>
               </li>
-            )}
+            )} */}
             {showAdminBoard && (
               <li className='nav-item'>
                 <NavLink
@@ -89,13 +89,13 @@ function SideBar () {
                 >
                   <i className='nav-icon fas fa-th' />
                   <p>
-                    Things Charts
+                    Things
                     <span className='right badge badge-danger'>New</span>
                   </p>
                 </NavLink>
               </li>
             )}
-            {true && (
+            {!showAdminBoard && (
               <li className='nav-item'>
                 <NavLink
                   to='/devices'

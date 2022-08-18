@@ -35,7 +35,7 @@ const Layout = ({ children }) => {
       </div>
       )
     : (
-      <Navigate to='/login' state={location.pathname} />
+      <Navigate to='/' state={location.pathname} />
       )
 }
 
